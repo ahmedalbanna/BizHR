@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import DashboardHeader from '@/components/dashboard-header';
 import { openPositions } from '@/lib/data';
 import type { OpenPosition } from '@/lib/types';
@@ -135,37 +136,38 @@ export default function RecruitmentPage() {
 
         <div className="grid gap-4">
           {filteredAndSortedPositions.map((position) => (
-            <Card
-              key={position.id}
-              className="transition-colors hover:bg-card/90"
-            >
-              <CardContent className="flex items-center gap-4 p-4">
-                <div className="flex-1 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <p className="text-lg font-semibold text-foreground">{position.title}</p>
-                     <Badge
-                        variant={getStatusBadgeVariant(position.status)}
-                        className={cn(position.status === 'Open' ? 'bg-green-500/20 text-green-700 border-green-500/20' : position.status === 'Closing Soon' ? 'bg-yellow-500/20 text-yellow-700 border-yellow-500/20' : '')}
-                     >
-                        {position.status}
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{position.department}</p>
-                  <p className="text-sm text-muted-foreground">Posted: {new Date(position.postedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric'})}</p>
-                  <div className="flex items-center gap-4 pt-2 text-sm text-primary">
-                    <div className="flex items-center gap-1">
-                      <Users className="h-4 w-4" />
-                      <span>{position.applications} Applications</span>
+             <Link href={`/dashboard/recruitment/${position.id}`} key={position.id}>
+              <Card
+                className="transition-colors hover:bg-card/90"
+              >
+                <CardContent className="flex items-center gap-4 p-4">
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <p className="text-lg font-semibold text-foreground">{position.title}</p>
+                      <Badge
+                          variant={getStatusBadgeVariant(position.status)}
+                          className={cn(position.status === 'Open' ? 'bg-green-500/20 text-green-700 border-green-500/20' : position.status === 'Closing Soon' ? 'bg-yellow-500/20 text-yellow-700 border-yellow-500/20' : '')}
+                      >
+                          {position.status}
+                      </Badge>
                     </div>
-                    <div className="flex items-center gap-1 text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span>{position.daysLeft} days left</span>
+                    <p className="text-sm text-muted-foreground">{position.department}</p>
+                    <p className="text-sm text-muted-foreground">Posted: {new Date(position.postedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric'})}</p>
+                    <div className="flex items-center gap-4 pt-2 text-sm text-primary">
+                      <div className="flex items-center gap-1">
+                        <Users className="h-4 w-4" />
+                        <span>{position.applications} Applications</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-muted-foreground">
+                        <Clock className="h-4 w-4" />
+                        <span>{position.daysLeft} days left</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </CardContent>
-            </Card>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
         
