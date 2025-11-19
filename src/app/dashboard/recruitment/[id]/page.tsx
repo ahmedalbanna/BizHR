@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { openPositions } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
@@ -150,9 +151,11 @@ export default function JobDetailsPage() {
                             <p className="text-xs text-muted-foreground">Shortlisted</p>
                         </div>
                     </div>
-                    <Button className="w-full mt-4">
-                        View All Applications <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    <Link href={`/dashboard/recruitment/${id}/applications`}>
+                        <Button className="w-full mt-4">
+                            View All Applications <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                    </Link>
                 </CardContent>
             </Card>
         </div>

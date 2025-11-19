@@ -5,6 +5,7 @@ import type {
   OpenPosition,
   DailyAttendance,
   EmployeePayroll,
+  Application,
 } from '@/lib/types';
 
 export const employees: Employee[] = [
@@ -367,4 +368,13 @@ export const employeePayroll: EmployeePayroll[] = [
         ]
       }
   },
+];
+
+export const applications: Application[] = [
+    { id: 'APP001', name: 'Sarah Johnson', avatar: 'https://picsum.photos/seed/app1/100/100', role: 'Senior Software Engineer', appliedDate: '2024-03-15', status: 'Received', jobId: 'OP01' },
+    { id: 'APP002', name: 'Michael Chen', avatar: 'https://picsum.photos/seed/app2/100/100', role: 'Product Manager', appliedDate: '2024-03-12', status: 'Reviewed', jobId: 'OP01' },
+    { id: 'APP003', name: 'Emily Rodriguez', avatar: 'https://picsum.photos/seed/app3/100/100', role: 'UX Designer', appliedDate: '2024-03-10', status: 'Interviewed', jobId: 'OP01' },
+    { id: 'APP004', name: 'David Thompson', avatar: 'https://picsum.photos/seed/app4/100/100', role: 'Data Analyst', appliedDate: '2024-03-08', status: 'Pending', jobId: 'OP01' },
+    { id: 'APP005', name: 'Jessica Park', avatar: 'https://picsum.photos/seed/app5/100/100', role: 'Marketing Specialist', appliedDate: '2024-03-05', status: 'Reviewed', jobId: 'OP01' },
+    { id: 'APP006', name: 'Robert Wilson', avatar: 'https://picsum.photos/seed/app6/100/100', role: 'DevOps Engineer', appliedDate: '2024-03-03', status: 'Interviewed', jobId: 'OP01' },
 ];

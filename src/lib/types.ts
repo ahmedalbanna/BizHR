@@ -81,3 +81,13 @@ export type EmployeePayroll = {
     }[];
   };
 };
+
+export type Application = {
+  id: string;
+  name: string;
+  avatar: string;
+  role: string;
+  appliedDate: string;
+  status: 'Pending' | 'Reviewed' | 'Interviewed' | 'Received';
+  jobId: string;
+};
