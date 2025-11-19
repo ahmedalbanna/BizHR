@@ -180,10 +180,12 @@ export default function RecruitmentPage() {
                 <p className='text-sm text-muted-foreground'>New applications today: 5</p>
             </CardContent>
             <CardFooter>
-                 <Button className="w-full md:w-auto">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Add New Job
-                </Button>
+                 <Link href="/dashboard/recruitment/new">
+                    <Button className="w-full md:w-auto">
+                        <Plus className="mr-2 h-4 w-4" />
+                        Add New Job
+                    </Button>
+                </Link>
             </CardFooter>
         </Card>
 
