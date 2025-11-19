@@ -50,3 +50,15 @@ export type DailyAttendance = {
   clockOut: string | null;
   reason?: string;
 };
+
+export type EmployeePayroll = {
+  id: string;
+  name: string;
+  avatar: string;
+  role: string;
+  status: 'Processed' | 'Pending';
+  baseSalary: number;
+  bonus: number;
+  deductions: number;
+  netSalary: number;
+};

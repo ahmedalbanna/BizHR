@@ -4,6 +4,7 @@ import type {
   Payroll,
   OpenPosition,
   DailyAttendance,
+  EmployeePayroll,
 } from '@/lib/types';
 
 export const employees: Employee[] = [
@@ -282,5 +283,52 @@ export const openPositions: OpenPosition[] = [
     applications: 45,
     daysLeft: 0,
     status: 'Closed',
+  },
+];
+
+export const employeePayroll: EmployeePayroll[] = [
+  {
+    id: 'EP01',
+    name: 'Sarah Johnson',
+    avatar: 'https://picsum.photos/seed/ep1/100/100',
+    role: 'Senior Software Engineer',
+    status: 'Processed',
+    baseSalary: 8500,
+    bonus: 1200,
+    deductions: 850,
+    netSalary: 8850,
+  },
+  {
+    id: 'EP02',
+    name: 'Michael Chen',
+    avatar: 'https://picsum.photos/seed/ep2/100/100',
+    role: 'Marketing Manager',
+    status: 'Pending',
+    baseSalary: 7200,
+    bonus: 800,
+    deductions: 720,
+    netSalary: 7280,
+  },
+  {
+    id: 'EP03',
+    name: 'Emily Rodriguez',
+    avatar: 'https://picsum.photos/seed/ep3/100/100',
+    role: 'Sales Director',
+    status: 'Processed',
+    baseSalary: 9500,
+    bonus: 2100,
+    deductions: 950,
+    netSalary: 10650,
+  },
+  {
+    id: 'EP04',
+    name: 'David Thompson',
+    avatar: 'https://picsum.photos/seed/ep4/100/100',
+    role: 'UI/UX Designer',
+    status: 'Pending',
+    baseSalary: 6800,
+    bonus: 500,
+    deductions: 680,
+    netSalary: 6620,
   },
 ];
