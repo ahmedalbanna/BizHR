@@ -1,0 +1,31 @@
+export type Employee = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  role: string;
+  department: string;
+  status: 'Active' | 'On Leave' | 'Terminated';
+  hireDate: string;
+  salary: number;
+};
+
+export type Attendance = {
+  id: string;
+  employeeName: string;
+  employeeId: string;
+  date: string;
+  clockIn: string;
+  clockOut: string | null;
+  totalHours: number | null;
+};
+
+export type Payroll = {
+  id: string;
+  employeeName: string;
+  employeeId: string;
+  grossPay: number;
+  deductions: number;
+  netPay: number;
+  payDate: string;
+};
