@@ -39,3 +39,14 @@ export type OpenPosition = {
   daysLeft: number;
   status: 'Open' | 'Closing Soon' | 'Closed';
 };
+
+export type DailyAttendance = {
+  id: string;
+  name: string;
+  avatar: string;
+  role: string;
+  status: 'Present' | 'Late' | 'Absent';
+  clockIn: string | null;
+  clockOut: string | null;
+  reason?: string;
+};

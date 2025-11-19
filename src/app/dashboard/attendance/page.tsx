@@ -1,105 +1,147 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import DashboardHeader from '@/components/dashboard-header';
-import { attendanceRecords } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
+import { dailyAttendanceLog } from '@/lib/data';
+import type { DailyAttendance } from '@/lib/types';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useToast } from '@/hooks/use-toast';
-import { Clock, LogIn, LogOut } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Calendar,
+  Filter,
+  Search,
+  Download,
+  MoreVertical,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+
+function getStatusIndicatorClass(status: DailyAttendance['status']) {
+  switch (status) {
+    case 'Present':
+      return 'bg-green-500';
+    case 'Late':
+      return 'bg-yellow-500';
+    case 'Absent':
+      return 'bg-red-500';
+  }
+}
 
 export default function AttendancePage() {
-  const [currentTime, setCurrentTime] = useState('');
-  const [isClockedIn, setIsClockedIn] = useState(false);
-  const { toast } = useToast();
+  const [date, setDate] = useState(new Date());
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString());
-    }, 1000);
-
-    // Check if the latest record is an unclosed clock-in
-    const latestRecord = attendanceRecords[attendanceRecords.length - 1];
-    if (latestRecord && !latestRecord.clockOut) {
-      setIsClockedIn(true);
-    }
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleClockIn = () => {
-    setIsClockedIn(true);
-    toast({
-      title: 'Clocked In',
-      description: `You have successfully clocked in at ${new Date().toLocaleTimeString()}.`,
-    });
-  };
-
-  const handleClockOut = () => {
-    setIsClockedIn(false);
-    toast({
-      title: 'Clocked Out',
-      description: `You have successfully clocked out at ${new Date().toLocaleTimeString()}.`,
-    });
-  };
+  const presentCount = dailyAttendanceLog.filter(
+    (log) => log.status === 'Present' || log.status === 'Late'
+  ).length;
+  const absentCount = dailyAttendanceLog.filter(
+    (log) => log.status === 'Absent'
+  ).length;
+  const lateCount = dailyAttendanceLog.filter(
+    (log) => log.status === 'Late'
+  ).length;
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
-      <DashboardHeader title="Attendance" />
+    <div className="flex min-h-screen w-full flex-col bg-background">
+      <DashboardHeader
+        title="Attendance Tracking"
+        subtitle="Monitor and manage employee attendance"
+        className="hidden md:flex"
+      >
+        <Button variant="ghost" size="icon">
+          <MoreVertical />
+        </Button>
+      </DashboardHeader>
       <main className="flex-1 space-y-4 p-4 md:p-6">
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card className="md:col-span-1">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Time Clock</CardTitle>
-              <Clock className="h-6 w-6 text-muted-foreground" />
-            </CardHeader>
-            <CardContent className="flex flex-col items-center justify-center gap-4">
-              <div className="text-4xl font-bold tracking-wider">{currentTime || '...'}</div>
-              <div className="flex w-full gap-2">
-                <Button className="flex-1" onClick={handleClockIn} disabled={isClockedIn}>
-                  <LogIn /> Clock In
-                </Button>
-                <Button className="flex-1" onClick={handleClockOut} disabled={!isClockedIn} variant="outline">
-                  <LogOut /> Clock Out
-                </Button>
+        <Card className="bg-gradient-to-br from-primary to-primary/70 text-primary-foreground">
+          <CardContent className="p-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Today's Overview</h2>
+                <p className="text-sm text-primary-foreground/80">
+                  {format(date, 'MMMM dd, yyyy')}
+                </p>
               </div>
-            </CardContent>
-          </Card>
-          <Card className="md:col-span-2">
-            <CardHeader>
-              <CardTitle>Recent Attendance Log</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Employee</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Clock In</TableHead>
-                    <TableHead>Clock Out</TableHead>
-                    <TableHead className="text-right">Total Hours</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {attendanceRecords.slice().reverse().map((record) => (
-                    <TableRow key={record.id}>
-                      <TableCell>{record.employeeName}</TableCell>
-                      <TableCell>{record.date}</TableCell>
-                      <TableCell>{record.clockIn}</TableCell>
-                      <TableCell>
-                        {record.clockOut ? record.clockOut : <Badge variant="secondary">In Progress</Badge>}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {record.totalHours ? `${record.totalHours.toFixed(2)}h` : '-'}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 bg-primary-foreground/20 hover:bg-primary-foreground/30"
+              >
+                <Calendar className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="text-4xl font-bold">{presentCount}</p>
+                <p className="text-xs text-primary-foreground/80">Present</p>
+              </div>
+              <div>
+                <p className="text-4xl font-bold">{absentCount}</p>
+                <p className="text-xs text-primary-foreground/80">Absent</p>
+              </div>
+              <div>
+                <p className="text-4xl font-bold">{lateCount}</p>
+                <p className="text-xs text-primary-foreground/80">Late</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div>
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold">Daily Attendance Log</h2>
+            <div className="flex gap-2">
+              <Button variant="ghost" size="icon">
+                <Filter className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <Search className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-3">
+          {dailyAttendanceLog.map((log) => (
+            <Card key={log.id}>
+              <CardContent className="flex items-center gap-4 p-3">
+                <Avatar className="h-10 w-10 border">
+                  <AvatarImage src={log.avatar} alt={log.name} />
+                  <AvatarFallback>{log.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <p className="font-semibold">{log.name}</p>
+                  <p className="text-sm text-muted-foreground">{log.role}</p>
+                </div>
+                <div className="text-right">
+                  <div className="flex items-center justify-end gap-2">
+                    <div
+                      className={cn(
+                        'h-2 w-2 rounded-full',
+                        getStatusIndicatorClass(log.status)
+                      )}
+                    />
+                    <p className="text-sm font-medium">{log.status}</p>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {log.status === 'Absent'
+                      ? log.reason
+                      : `${log.clockIn} - ${log.clockOut}`}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <div className="flex gap-2">
+            <Button className="flex-1">
+                <Download className="mr-2 h-4 w-4" />
+                Generate Report
+            </Button>
+            <Button variant="outline" size="icon">
+                <Calendar className="h-5 w-5" />
+            </Button>
         </div>
       </main>
     </div>
