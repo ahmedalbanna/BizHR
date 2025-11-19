@@ -2,16 +2,18 @@
 
 import type { FC, HTMLAttributes } from "react";
 import { Button } from "@/components/ui/button";
-import { Settings, Bell } from "lucide-react";
+import { Settings, Search } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
 interface DashboardHeaderProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
+  subtitle?: string;
 }
 
 const DashboardHeader: FC<DashboardHeaderProps> = ({
   title,
+  subtitle,
   className,
   ...props
 }) => {
@@ -24,10 +26,13 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
       {...props}
     >
       <SidebarTrigger className="md:hidden" />
-      <h1 className="flex-1 text-xl font-semibold tracking-tight">{title}</h1>
+      <div className="flex-1">
+        <h1 className="text-lg font-semibold tracking-tight">{title}</h1>
+        {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
+      </div>
       <Button variant="ghost" size="icon" className="relative h-9 w-9 rounded-full">
-        <Bell className="h-5 w-5" />
-        <span className="sr-only">Notifications</span>
+        <Search className="h-5 w-5" />
+        <span className="sr-only">Search</span>
       </Button>
       <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
         <Settings className="h-5 w-5" />

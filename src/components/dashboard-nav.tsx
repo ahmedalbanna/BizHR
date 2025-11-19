@@ -17,13 +17,13 @@ import {
   Settings,
 } from 'lucide-react';
 
-const navItems = [
-  { href: '/dashboard', icon: <LayoutGrid />, label: 'Dashboard' },
-  { href: '/dashboard/employees', icon: <Users />, label: 'Employees' },
-  { href: '/dashboard/recruitment', icon: <Briefcase />, label: 'Recruitment' },
-  { href: '/dashboard/attendance', icon: <Clock />, label: 'Attendance' },
-  { href: '/dashboard/payroll', icon: <Banknote />, label: 'Payroll' },
-  { href: '/dashboard/reports', icon: <BarChart />, label: 'Reports' },
+export const navItems = [
+  { href: '/dashboard', icon: LayoutGrid, label: 'Dashboard' },
+  { href: '/dashboard/employees', icon: Users, label: 'Employees' },
+  { href: '/dashboard/recruitment', icon: Briefcase, label: 'Recruitment' },
+  { href: '/dashboard/attendance', icon: Clock, label: 'Attendance' },
+  { href: '/dashboard/payroll', icon: Banknote, label: 'Payroll' },
+  { href: '/dashboard/reports', icon: BarChart, label: 'Reports' },
 ];
 
 export function DashboardNav() {
@@ -39,7 +39,7 @@ export function DashboardNav() {
             tooltip={item.label}
           >
             <Link href={item.href}>
-              {item.icon}
+              <item.icon />
               <span>{item.label}</span>
             </Link>
           </SidebarMenuButton>
