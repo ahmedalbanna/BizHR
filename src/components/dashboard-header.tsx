@@ -1,6 +1,6 @@
 "use client";
 
-import type { FC, HTMLAttributes } from "react";
+import type { FC, HTMLAttributes, ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Settings, Search } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -9,12 +9,14 @@ import { cn } from "@/lib/utils";
 interface DashboardHeaderProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   subtitle?: string;
+  children?: ReactNode;
 }
 
 const DashboardHeader: FC<DashboardHeaderProps> = ({
   title,
   subtitle,
   className,
+  children,
   ...props
 }) => {
   return (
@@ -34,6 +36,7 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
         <Search className="h-5 w-5" />
         <span className="sr-only">Search</span>
       </Button>
+      {children}
       <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
         <Settings className="h-5 w-5" />
         <span className="sr-only">Settings</span>

@@ -29,3 +29,13 @@ export type Payroll = {
   netPay: number;
   payDate: string;
 };
+
+export type OpenPosition = {
+  id: string;
+  title: string;
+  department: string;
+  postedDate: string;
+  applications: number;
+  daysLeft: number;
+  status: 'Open' | 'Closing Soon' | 'Closed';
+};

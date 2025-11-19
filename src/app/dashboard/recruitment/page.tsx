@@ -1,163 +1,190 @@
 'use client';
 
-import { useFormState } from 'react-dom';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { useState } from 'react';
 import DashboardHeader from '@/components/dashboard-header';
+import { openPositions } from '@/lib/data';
+import type { OpenPosition } from '@/lib/types';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { suggestJobPostingPlatforms, JobPostingOptimizationOutput } from '@/ai/flows/job-posting-optimization';
-import { Lightbulb, Loader2, Share2 } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Search,
+  ChevronRight,
+  Users,
+  Clock,
+  Plus,
+  Bell,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-const formSchema = z.object({
-  jobDescription: z.string().min(50, 'Job description must be at least 50 characters.'),
-  location: z.string().min(2, 'Location is required.'),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
-type SuggestionState = {
-  result: JobPostingOptimizationOutput | null;
-  error: string | null;
-};
-
-async function suggestPlatformsAction(prevState: SuggestionState, data: FormData): Promise<SuggestionState> {
-  const jobDescription = data.get('jobDescription') as string;
-  const location = data.get('location') as string;
-
-  try {
-    const result = await suggestJobPostingPlatforms({ jobDescription, location });
-    return { result, error: null };
-  } catch (error) {
-    return { result: null, error: 'Failed to get suggestions. Please try again.' };
+function getStatusBadgeVariant(status: OpenPosition['status']) {
+  switch (status) {
+    case 'Open':
+      return 'default';
+    case 'Closing Soon':
+      return 'secondary';
+    case 'Closed':
+      return 'destructive';
   }
 }
 
-const initialState: SuggestionState = {
-  result: null,
-  error: null,
-};
-
 export default function RecruitmentPage() {
-  const [state, formAction] = useFormState(suggestPlatformsAction, initialState);
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      jobDescription: '',
-      location: '',
-    },
-  });
+  const [department, setDepartment] = useState('all');
+  const [status, setStatus] = useState('all');
+  const [sortBy, setSortBy] = useState('posted-desc');
 
-  const { isSubmitting } = form.formState;
+  const filteredAndSortedPositions = openPositions
+    .filter((position) => {
+      const matchesDept =
+        department === 'all' || position.department === department;
+      const matchesStatus = status === 'all' || position.status === status;
+      return matchesDept && matchesStatus;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'posted-desc':
+          return (
+            new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
+          );
+        case 'posted-asc':
+          return (
+            new Date(a.postedDate).getTime() - new Date(b.postedDate).getTime()
+          );
+        case 'title-asc':
+          return a.title.localeCompare(b.title);
+        case 'title-desc':
+          return b.title.localeCompare(a.title);
+        default:
+          return 0;
+      }
+    });
+
+  const departments = [...new Set(openPositions.map((p) => p.department))];
+  const statuses = ['Open', 'Closing Soon', 'Closed'];
 
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <DashboardHeader title="Recruitment" />
+      <DashboardHeader title="Recruitment Management" subtitle="Manage your recruitment process" className="hidden md:flex">
+         <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
+            <Bell className="h-5 w-5" />
+            <span className="sr-only">Notifications</span>
+        </Button>
+      </DashboardHeader>
       <main className="flex-1 space-y-4 p-4 md:p-6">
-        <div className="grid gap-6 lg:grid-cols-5">
-          <Card className="lg:col-span-3">
-            <Form {...form}>
-              <form action={formAction}>
-                <CardHeader>
-                  <CardTitle>Job Posting Optimizer</CardTitle>
-                  <CardDescription>
-                    Enter job details to get AI-powered recommendations for the best posting platforms.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="jobDescription"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Job Description</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="e.g., Seeking a proactive Senior React Developer with 5+ years of experience..."
-                            className="min-h-[200px]"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="location"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Location</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., San Francisco, CA or Remote" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </CardContent>
-                <CardFooter>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <Lightbulb />
-                        Get Suggestions
-                      </>
-                    )}
-                  </Button>
-                </CardFooter>
-              </form>
-            </Form>
-          </Card>
-          <div className="lg:col-span-2">
-            <Card className="sticky top-20">
-              <CardHeader>
-                <CardTitle>Suggested Platforms</CardTitle>
-                <CardDescription>
-                  Here are the top platforms to reach your ideal candidates.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {isSubmitting && (
-                  <div className="flex items-center justify-center py-8">
-                    <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold tracking-tight">Recruitment Management</h1>
+            <Button variant="ghost" size="icon">
+                <Search className="h-6 w-6" />
+            </Button>
+        </div>
+        <div className="flex flex-col gap-2 md:flex-row">
+          <Select value={department} onValueChange={setDepartment}>
+            <SelectTrigger>
+              <SelectValue placeholder="Department" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Departments</SelectItem>
+              {departments.map((dept) => (
+                <SelectItem key={dept} value={dept}>
+                  {dept}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={status} onValueChange={setStatus}>
+            <SelectTrigger>
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              {statuses.map((stat) => (
+                <SelectItem key={stat} value={stat}>
+                  {stat}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger>
+              <SelectValue placeholder="Sort By" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="posted-desc">Newest</SelectItem>
+              <SelectItem value="posted-asc">Oldest</SelectItem>
+              <SelectItem value="title-asc">Title (A-Z)</SelectItem>
+              <SelectItem value="title-desc">Title (Z-A)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <h2 className="text-xl font-semibold">Open Positions</h2>
+
+        <div className="grid gap-4">
+          {filteredAndSortedPositions.map((position) => (
+            <Card
+              key={position.id}
+              className="transition-colors hover:bg-card/90"
+            >
+              <CardContent className="flex items-center gap-4 p-4">
+                <div className="flex-1 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <p className="text-lg font-semibold text-foreground">{position.title}</p>
+                     <Badge
+                        variant={getStatusBadgeVariant(position.status)}
+                        className={cn(position.status === 'Open' ? 'bg-green-500/20 text-green-700 border-green-500/20' : position.status === 'Closing Soon' ? 'bg-yellow-500/20 text-yellow-700 border-yellow-500/20' : '')}
+                     >
+                        {position.status}
+                    </Badge>
                   </div>
-                )}
-                {state.error && <p className="text-destructive">{state.error}</p>}
-                {state.result && state.result.suggestedPlatforms.length > 0 && (
-                  <ul className="space-y-3">
-                    {state.result.suggestedPlatforms.map((platform, index) => (
-                      <li key={index} className="flex items-center justify-between rounded-md border p-3">
-                        <div className="flex items-center gap-3">
-                            <Share2 className="h-5 w-5 text-primary" />
-                            <span className="font-medium">{platform}</span>
-                        </div>
-                        <Button variant="outline" size="sm">
-                          Visit
-                        </Button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {!isSubmitting && !state.result && (
-                     <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 p-8 text-center">
-                        <Lightbulb className="mx-auto h-12 w-12 text-muted-foreground/50" />
-                        <p className="mt-4 text-sm text-muted-foreground">Your platform suggestions will appear here.</p>
+                  <p className="text-sm text-muted-foreground">{position.department}</p>
+                  <p className="text-sm text-muted-foreground">Posted: {new Date(position.postedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric'})}</p>
+                  <div className="flex items-center gap-4 pt-2 text-sm text-primary">
+                    <div className="flex items-center gap-1">
+                      <Users className="h-4 w-4" />
+                      <span>{position.applications} Applications</span>
                     </div>
-                )}
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <Clock className="h-4 w-4" />
+                      <span>{position.daysLeft} days left</span>
+                    </div>
+                  </div>
+                </div>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </CardContent>
             </Card>
-          </div>
+          ))}
         </div>
+        
+        <Card className="bg-card/50">
+            <CardHeader>
+                <CardTitle>Applications Summary</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p>Total active applications: 73</p>
+                <p className='text-sm text-muted-foreground'>New applications today: 5</p>
+            </CardContent>
+            <CardFooter>
+                 <Button className="w-full md:w-auto">
+                    <Plus className="mr-2 h-4 w-4" />
+                    Add New Job
+                </Button>
+            </CardFooter>
+        </Card>
+
       </main>
     </div>
   );

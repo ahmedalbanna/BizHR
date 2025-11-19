@@ -1,4 +1,4 @@
-import type { Employee, Attendance, Payroll } from '@/lib/types';
+import type { Employee, Attendance, Payroll, OpenPosition } from '@/lib/types';
 
 export const employees: Employee[] = [
   {
@@ -109,4 +109,12 @@ export const departmentHeadcountData = [
     { name: 'Design', value: 12, fill: 'var(--color-chart-3)' },
     { name: 'Human Resources', value: 5, fill: 'var(--color-chart-4)' },
     { name: 'Marketing', value: 15, fill: 'var(--color-chart-5)' },
+];
+
+export const openPositions: OpenPosition[] = [
+    { id: 'OP01', title: 'Senior Software Engineer', department: 'Engineering Department', postedDate: '2024-03-15', applications: 24, daysLeft: 5, status: 'Open' },
+    { id: 'OP02', title: 'Marketing Manager', department: 'Marketing Department', postedDate: '2024-03-12', applications: 18, daysLeft: 8, status: 'Open' },
+    { id: 'OP03', title: 'Sales Representative', department: 'Sales Department', postedDate: '2024-03-20', applications: 32, daysLeft: 2, status: 'Closing Soon' },
+    { id: 'OP04', title: 'UX Designer', department: 'Design', postedDate: '2024-03-18', applications: 12, daysLeft: 10, status: 'Open' },
+    { id: 'OP05', title: 'HR Business Partner', department: 'Human Resources', postedDate: '2024-02-28', applications: 45, daysLeft: 0, status: 'Closed' },
 ];
