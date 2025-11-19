@@ -7,6 +7,7 @@ import type {
   EmployeePayroll,
   Application,
   Notification,
+  CalendarEvent,
 } from '@/lib/types';
 
 export const employees: Employee[] = [
@@ -387,4 +388,15 @@ export const notifications: Notification[] = [
     { id: 'N04', type: 'onboarding', title: 'New Employee Onboarding', description: 'Michael Chen starts Monday - prepare onboarding materials', timestamp: '2 days ago', read: true },
     { id: 'N05', type: 'exit', title: 'Employee Exit Interview', description: 'Schedule exit interview with departing employee Lisa Wong', timestamp: '3 days ago', read: true },
     { id: 'N06', type: 'training', title: 'Training Session Completed', description: 'Workplace Safety training completed by 15 employees', timestamp: '1 week ago', read: true },
+];
+
+export const calendarEvents: CalendarEvent[] = [
+    { id: 'CE01', title: 'Team Performance Review', date: '2024-12-15', time: '10:00 AM - 11:30 AM', type: 'Performance Review', attendees: ['Sarah Johnson', 'Mike Chen', 'Alex Rodriguez'], location: 'Conference Room A' },
+    { id: 'CE02', title: 'Marketing Sync', date: '2024-12-03', time: '2:00 PM - 3:00 PM', type: 'Team Event', attendees: ['Ethan Hunt', 'Diana Prince'], location: 'Zoom' },
+    { id: 'CE03', title: 'Candidate Interview: UX Designer', date: '2024-12-17', time: '1:00 PM - 2:00 PM', type: 'Interview', attendees: ['Charlie Brown', 'Diana Prince'], location: 'Room 301' },
+    { id: 'CE04', title: 'Christmas Day', date: '2024-12-25', time: 'All Day', type: 'Holiday', attendees: [], location: '' },
+    { id: 'CE05', title: 'Engineering Standup', date: '2024-12-05', time: '9:30 AM - 10:00 AM', type: 'Team Event', attendees: ['Alice Johnson', 'Fiona Glenanne'], location: 'Engineering Area' },
+    { id: 'CE06', title: 'Product Roadmap Planning', date: '2024-12-20', time: '1:00 PM - 4:00 PM', type: 'Team Event', attendees: ['Bob Williams', 'Alice Johnson', 'Charlie Brown'], location: 'Main Conference Room' },
+    { id: 'CE07', title: 'Interview with John Doe', date: '2024-12-23', time: '11:00 AM - 12:00 PM', type: 'Interview', attendees: ['Diana Prince'], location: 'Room 202'},
+    { id: 'CE08', title: 'New Year\'s Eve', date: '2024-12-31', time: 'All Day', type: 'Holiday', attendees: [], location: '' },
 ];

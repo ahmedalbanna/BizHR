@@ -100,3 +100,13 @@ export type Notification = {
   timestamp: string;
   read: boolean;
 };
+
+export type CalendarEvent = {
+    id: string;
+    title: string;
+    date: string;
+    time: string;
+    type: 'Team Event' | 'Performance Review' | 'Interview' | 'Holiday';
+    attendees: string[];
+    location: string;
+}

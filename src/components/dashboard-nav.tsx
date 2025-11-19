@@ -16,6 +16,7 @@ import {
   BarChart,
   Settings,
   Bell,
+  Calendar,
 } from 'lucide-react';
 
 export const navItems = [
@@ -24,6 +25,7 @@ export const navItems = [
   { href: '/dashboard/recruitment', icon: Briefcase, label: 'Recruitment' },
   { href: '/dashboard/attendance', icon: Clock, label: 'Attendance' },
   { href: '/dashboard/payroll', icon: Banknote, label: 'Payroll' },
+  { href: '/dashboard/calendar', icon: Calendar, label: 'Calendar' },
   { href: '/dashboard/reports', icon: BarChart, label: 'Reports' },
   { href: '/dashboard/notifications', icon: Bell, label: 'Notifications' },
 ];

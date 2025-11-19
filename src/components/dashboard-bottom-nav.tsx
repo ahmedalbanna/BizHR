@@ -4,14 +4,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navItems } from './dashboard-nav';
 import { cn } from '@/lib/utils';
+import { Calendar } from 'lucide-react';
 
 export function DashboardBottomNav() {
   const pathname = usePathname();
 
-  // Show only the first 4 items + notifications
+  // Show only the first 4 items + calendar
   const bottomNavItems = [
       ...navItems.slice(0, 4),
-      navItems.find(item => item.label === 'Notifications')
+      navItems.find(item => item.label === 'Calendar')
   ].filter(Boolean);
 
   return (
