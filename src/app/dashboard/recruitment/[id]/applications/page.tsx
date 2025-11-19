@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
 import { applications } from '@/lib/data';
 import type { Application } from '@/lib/types';
@@ -79,30 +80,32 @@ export default function ApplicationsPage() {
 
         <div className="grid gap-3">
           {filteredApplicants.map((applicant) => (
-            <Card key={applicant.id}>
-              <CardContent className="flex items-center gap-4 p-3">
-                <Avatar className="h-12 w-12 border">
-                  <AvatarImage src={applicant.avatar} alt={applicant.name} />
-                  <AvatarFallback>{applicant.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <p className="font-semibold">{applicant.name}</p>
-                  <p className="text-sm text-primary">{applicant.role}</p>
-                  <p className="text-xs text-muted-foreground">
-                    Applied: {applicant.appliedDate}
-                  </p>
-                  <p className={cn("text-xs font-semibold mt-1", getStatusColor(applicant.status))}>{applicant.status}</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Button variant="outline" size="icon" className="h-9 w-9 bg-primary/10 border-0 text-primary">
-                    <MessageSquare className="h-5 w-5" />
-                  </Button>
-                  <Button variant="outline" size="icon" className="h-9 w-9 bg-green-500/20 border-0 text-green-400">
-                    <Phone className="h-5 w-5" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <Link href={`/dashboard/recruitment/${jobId}/applications/${applicant.id}`} key={applicant.id}>
+              <Card>
+                <CardContent className="flex items-center gap-4 p-3">
+                  <Avatar className="h-12 w-12 border">
+                    <AvatarImage src={applicant.avatar} alt={applicant.name} />
+                    <AvatarFallback>{applicant.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <p className="font-semibold">{applicant.name}</p>
+                    <p className="text-sm text-primary">{applicant.role}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Applied: {applicant.appliedDate}
+                    </p>
+                    <p className={cn("text-xs font-semibold mt-1", getStatusColor(applicant.status))}>{applicant.status}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Button variant="outline" size="icon" className="h-9 w-9 bg-primary/10 border-0 text-primary">
+                      <MessageSquare className="h-5 w-5" />
+                    </Button>
+                    <Button variant="outline" size="icon" className="h-9 w-9 bg-green-500/20 border-0 text-green-400">
+                      <Phone className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </main>
