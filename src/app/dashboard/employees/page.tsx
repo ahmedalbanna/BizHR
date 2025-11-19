@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import DashboardHeader from '@/components/dashboard-header';
 import { employees } from '@/lib/data';
 import type { Employee } from '@/lib/types';
@@ -112,49 +113,48 @@ export default function EmployeesPage() {
 
         <div className="grid gap-4">
           {filteredAndSortedEmployees.map((employee) => (
-            <Card
-              key={employee.id}
-              className="hover:bg-card/90 transition-colors"
-            >
-              <CardContent className="flex items-center gap-4 p-4">
-                <Avatar className="h-14 w-14 border">
-                  <AvatarImage
-                    src={employee.avatar}
-                    alt={employee.name}
-                    data-ai-hint="person"
-                  />
-                  <AvatarFallback>{employee.name.charAt(0)}</AvatarFallback>
-                  <span
-                    className={cn(
-                      'absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full border-2 border-background',
-                      employee.status === 'Active'
-                        ? 'bg-green-500'
-                        : 'bg-muted-foreground'
-                    )}
-                  />
-                </Avatar>
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground">{employee.name}</p>
-                  <p className="text-sm text-primary">{employee.role}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {employee.department}
-                  </p>
-                  <div className="mt-2 flex gap-2">
-                    <Badge variant="secondary">Full Time</Badge>
-                    <Badge
-                      variant={getStatusBadgeVariant(employee.status)}
+            <Link href={`/dashboard/employees/${employee.id}`} key={employee.id}>
+              <Card className="hover:bg-card/90 transition-colors">
+                <CardContent className="flex items-center gap-4 p-4">
+                  <Avatar className="h-14 w-14 border">
+                    <AvatarImage
+                      src={employee.avatar}
+                      alt={employee.name}
+                      data-ai-hint="person"
+                    />
+                    <AvatarFallback>{employee.name.charAt(0)}</AvatarFallback>
+                    <span
                       className={cn(
-                        employee.status === 'Active' &&
-                          'bg-green-500/20 text-green-700 border-green-500/20 hover:bg-green-500/30 dark:bg-green-500/10 dark:text-green-400 dark:border-green-500/10'
+                        'absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full border-2 border-background',
+                        employee.status === 'Active'
+                          ? 'bg-green-500'
+                          : 'bg-muted-foreground'
                       )}
-                    >
-                      {employee.status === 'Active' ? 'Present' : employee.status}
-                    </Badge>
+                    />
+                  </Avatar>
+                  <div className="flex-1">
+                    <p className="font-semibold text-foreground">{employee.name}</p>
+                    <p className="text-sm text-primary">{employee.role}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {employee.department}
+                    </p>
+                    <div className="mt-2 flex gap-2">
+                      <Badge variant="secondary">Full Time</Badge>
+                      <Badge
+                        variant={getStatusBadgeVariant(employee.status)}
+                        className={cn(
+                          employee.status === 'Active' &&
+                            'bg-green-500/20 text-green-700 border-green-500/20 hover:bg-green-500/30 dark:bg-green-500/10 dark:text-green-400 dark:border-green-500/10'
+                        )}
+                      >
+                        {employee.status === 'Active' ? 'Present' : employee.status}
+                      </Badge>
+                    </div>
                   </div>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </CardContent>
-            </Card>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </main>
