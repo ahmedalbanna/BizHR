@@ -57,9 +57,11 @@ export default function JobDetailsPage() {
           <ArrowLeft />
         </Button>
         <h1 className="text-xl font-semibold">Job Details</h1>
-        <Button variant="ghost" size="icon">
-          <Pencil />
-        </Button>
+        <Link href={`/dashboard/recruitment/${id}/edit`}>
+          <Button variant="ghost" size="icon">
+            <Pencil />
+          </Button>
+        </Link>
       </header>
 
       <main className="space-y-6 p-4">
@@ -161,9 +163,11 @@ export default function JobDetailsPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-            <Button>
-                <Pencil className="mr-2 h-4 w-4" /> Edit Job
-            </Button>
+            <Link href={`/dashboard/recruitment/${id}/edit`} className="w-full">
+                <Button className="w-full">
+                    <Pencil className="mr-2 h-4 w-4" /> Edit Job
+                </Button>
+            </Link>
             <Button variant="destructive">
                 <X className="mr-2 h-4 w-4" /> Close Job
             </Button>
