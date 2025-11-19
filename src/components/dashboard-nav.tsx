@@ -30,6 +30,7 @@ export const navItems = [
   { href: '/dashboard/reports', icon: BarChart, label: 'Reports' },
   { href: '/dashboard/files', icon: Folder, label: 'Files' },
   { href: '/dashboard/notifications', icon: Bell, label: 'Notifications' },
+  { href: '/dashboard/settings', icon: Settings, label: 'Settings' },
 ];
 
 export function DashboardNav() {

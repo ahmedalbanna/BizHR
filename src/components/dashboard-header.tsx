@@ -44,10 +44,12 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
             <span className="sr-only">Notifications</span>
         </Button>
       </Link>
-      <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
-        <Settings className="h-5 w-5" />
-        <span className="sr-only">Settings</span>
-      </Button>
+      <Link href="/dashboard/settings">
+        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
+          <Settings className="h-5 w-5" />
+          <span className="sr-only">Settings</span>
+        </Button>
+      </Link>
     </header>
   );
 };
