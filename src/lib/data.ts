@@ -8,6 +8,7 @@ import type {
   Application,
   Notification,
   CalendarEvent,
+  Document,
 } from '@/lib/types';
 
 export const employees: Employee[] = [
@@ -399,4 +400,45 @@ export const calendarEvents: CalendarEvent[] = [
     { id: 'CE06', title: 'Product Roadmap Planning', date: '2024-12-20', time: '1:00 PM - 4:00 PM', type: 'Team Event', attendees: ['Bob Williams', 'Alice Johnson', 'Charlie Brown'], location: 'Main Conference Room' },
     { id: 'CE07', title: 'Interview with John Doe', date: '2024-12-23', time: '11:00 AM - 12:00 PM', type: 'Interview', attendees: ['Diana Prince'], location: 'Room 202'},
     { id: 'CE08', title: 'New Year\'s Eve', date: '2024-12-31', time: 'All Day', type: 'Holiday', attendees: [], location: '' },
+];
+
+export const documents: Document[] = [
+  {
+    id: 'DOC001',
+    name: 'Financial Report Q4 2024.pdf',
+    type: 'pdf',
+    size: '2.4 MB',
+    uploadDate: 'Dec 15, 2024',
+    tag: { label: 'Confidential', color: 'green' },
+  },
+  {
+    id: 'DOC002',
+    name: 'Project Proposal Draft.docx',
+    type: 'docx',
+    size: '1.8 MB',
+    uploadDate: 'Dec 14, 2024',
+    tag: { label: 'Shared', color: 'purple' },
+  },
+  {
+    id: 'DOC003',
+    name: 'Meeting Notes - Team Sync.txt',
+    type: 'txt',
+    size: '45 KB',
+    uploadDate: 'Dec 13, 2024',
+  },
+  {
+    id: 'DOC004',
+    name: 'Company Logo Assets.zip',
+    type: 'zip',
+    size: '15.2 MB',
+    uploadDate: 'Dec 12, 2024',
+    tag: { label: 'Brand Assets', color: 'blue' },
+  },
+  {
+    id: 'DOC005',
+    name: 'Budget Analysis 2024.xlsx',
+    type: 'xlsx',
+    size: '3.7 MB',
+    uploadDate: 'Dec 11, 2024',
+  },
 ];

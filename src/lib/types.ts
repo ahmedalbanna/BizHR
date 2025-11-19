@@ -110,3 +110,15 @@ export type CalendarEvent = {
     attendees: string[];
     location: string;
 }
+
+export type Document = {
+  id: string;
+  name: string;
+  type: 'pdf' | 'docx' | 'txt' | 'zip' | 'xlsx';
+  size: string;
+  uploadDate: string;
+  tag?: {
+    label: string;
+    color: string;
+  };
+};

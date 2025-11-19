@@ -17,6 +17,7 @@ import {
   Settings,
   Bell,
   Calendar,
+  Folder,
 } from 'lucide-react';
 
 export const navItems = [
@@ -27,6 +28,7 @@ export const navItems = [
   { href: '/dashboard/payroll', icon: Banknote, label: 'Payroll' },
   { href: '/dashboard/calendar', icon: Calendar, label: 'Calendar' },
   { href: '/dashboard/reports', icon: BarChart, label: 'Reports' },
+  { href: '/dashboard/files', icon: Folder, label: 'Files' },
   { href: '/dashboard/notifications', icon: Bell, label: 'Notifications' },
 ];
 

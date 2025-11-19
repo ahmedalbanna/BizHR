@@ -15,6 +15,18 @@ export function DashboardBottomNav() {
       navItems.find(item => item.label === 'Calendar')
   ].filter(Boolean);
 
+  // Manually add Files for now as it's not in the main nav by default
+  const filesItem = navItems.find(item => item.label === 'Files');
+  if (filesItem && !bottomNavItems.find(item => item && item.label === 'Files')) {
+      // Replace one of the items if we have too many
+      if (bottomNavItems.length >= 5) {
+          bottomNavItems.splice(4, 1, filesItem);
+      } else {
+          bottomNavItems.push(filesItem);
+      }
+  }
+
+
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full border-t bg-background/95 backdrop-blur-sm md:hidden">
       <div className="grid h-16 grid-cols-5">
