@@ -13,7 +13,7 @@ import {
   Briefcase,
   Folder,
   FileText,
-  BadgeId,
+  IdCard,
   Receipt,
   Award,
   Download,
@@ -88,7 +88,7 @@ export default function EmployeeProfilePage() {
   
   const documents = [
       { icon: <FileText className="h-5 w-5 text-primary" />, label: 'Employment Contract'},
-      { icon: <BadgeId className="h-5 w-5 text-primary" />, label: 'ID Verification'},
+      { icon: <IdCard className="h-5 w-5 text-primary" />, label: 'ID Verification'},
       { icon: <Receipt className="h-5 w-5 text-primary" />, label: 'Latest Payslip'},
       { icon: <Award className="h-5 w-5 text-primary" />, label: 'Certifications'},
   ]

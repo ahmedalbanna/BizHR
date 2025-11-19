@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Filter, ListFilter } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 function getStatusBadgeVariant(status: EmployeePayroll['status']) {
   switch (status) {
@@ -103,58 +104,60 @@ export default function PayrollPage() {
 
         <div className="grid gap-4">
           {employeePayroll.map((item) => (
-            <Card key={item.id}>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-4">
-                  <Avatar className="h-12 w-12 border">
-                    <AvatarImage src={item.avatar} alt={item.name} />
-                    <AvatarFallback>{item.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <p className="font-semibold">{item.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {item.role}
-                    </p>
+            <Link href={`/dashboard/payroll/${item.id}`} key={item.id}>
+              <Card className="transition-colors hover:bg-card/90">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-4">
+                    <Avatar className="h-12 w-12 border">
+                      <AvatarImage src={item.avatar} alt={item.name} />
+                      <AvatarFallback>{item.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <p className="font-semibold">{item.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.role}
+                      </p>
+                    </div>
+                    <Badge
+                      variant={getStatusBadgeVariant(item.status)}
+                      className={cn(
+                        item.status === 'Processed'
+                          ? 'bg-green-500/20 text-green-700 hover:bg-green-500/30'
+                          : 'bg-yellow-500/20 text-yellow-700 hover:bg-yellow-500/30'
+                      )}
+                    >
+                      {item.status}
+                    </Badge>
                   </div>
-                  <Badge
-                    variant={getStatusBadgeVariant(item.status)}
-                    className={cn(
-                      item.status === 'Processed'
-                        ? 'bg-green-500/20 text-green-700 hover:bg-green-500/30'
-                        : 'bg-yellow-500/20 text-yellow-700 hover:bg-yellow-500/30'
-                    )}
-                  >
-                    {item.status}
-                  </Badge>
-                </div>
-                <div className="mt-4 grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
-                  <div>
-                    <p className="text-muted-foreground">Base Salary</p>
-                    <p className="font-semibold">
-                      ${item.baseSalary.toLocaleString()}
-                    </p>
+                  <div className="mt-4 grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
+                    <div>
+                      <p className="text-muted-foreground">Base Salary</p>
+                      <p className="font-semibold">
+                        ${item.baseSalary.toLocaleString()}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Bonus</p>
+                      <p className="font-semibold text-green-500">
+                        +${item.bonus.toLocaleString()}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Deductions</p>
+                      <p className="font-semibold text-destructive">
+                        -${item.deductions.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="text-right md:text-left">
+                      <p className="text-muted-foreground">Net Salary</p>
+                      <p className="font-bold text-primary">
+                        ${item.netSalary.toLocaleString()}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-muted-foreground">Bonus</p>
-                    <p className="font-semibold text-green-500">
-                      +${item.bonus.toLocaleString()}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground">Deductions</p>
-                    <p className="font-semibold text-destructive">
-                      -${item.deductions.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="text-right md:text-left">
-                    <p className="text-muted-foreground">Net Salary</p>
-                    <p className="font-bold text-primary">
-                      ${item.netSalary.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </main>

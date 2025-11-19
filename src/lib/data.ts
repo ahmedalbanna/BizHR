@@ -297,6 +297,15 @@ export const employeePayroll: EmployeePayroll[] = [
     bonus: 1200,
     deductions: 850,
     netSalary: 8850,
+    details: {
+      earnings: { base: 3500, bonus: 500, overtime: 250 },
+      deductions: { federal: 837.5, state: 212.5, socialSecurity: 127.5, medicare: 61.63, insurance: 23.37 },
+      paymentHistory: [
+        { date: 'Nov 15, 2024', period: 'Pay Period: Nov 1-15', amount: 3187.50 },
+        { date: 'Oct 31, 2024', period: 'Pay Period: Oct 16-31', amount: 3187.50 },
+        { date: 'Oct 15, 2024', period: 'Pay Period: Oct 1-15', amount: 3187.50 },
+      ]
+    }
   },
   {
     id: 'EP02',
@@ -308,6 +317,15 @@ export const employeePayroll: EmployeePayroll[] = [
     bonus: 800,
     deductions: 720,
     netSalary: 7280,
+    details: {
+        earnings: { base: 3200, bonus: 400, overtime: 150 },
+        deductions: { federal: 700, state: 180.5, socialSecurity: 110.5, medicare: 50.63, insurance: 20.37 },
+        paymentHistory: [
+          { date: 'Nov 15, 2024', period: 'Pay Period: Nov 1-15', amount: 2800.50 },
+          { date: 'Oct 31, 2024', period: 'Pay Period: Oct 16-31', amount: 2800.50 },
+          { date: 'Oct 15, 2024', period: 'Pay Period: Oct 1-15', amount: 2800.50 },
+        ]
+      }
   },
   {
     id: 'EP03',
@@ -319,6 +337,15 @@ export const employeePayroll: EmployeePayroll[] = [
     bonus: 2100,
     deductions: 950,
     netSalary: 10650,
+    details: {
+        earnings: { base: 4000, bonus: 1000, overtime: 300 },
+        deductions: { federal: 900, state: 250, socialSecurity: 150, medicare: 70, insurance: 30 },
+        paymentHistory: [
+          { date: 'Nov 15, 2024', period: 'Pay Period: Nov 1-15', amount: 4200.00 },
+          { date: 'Oct 31, 2024', period: 'Pay Period: Oct 16-31', amount: 4200.00 },
+          { date: 'Oct 15, 2024', period: 'Pay Period: Oct 1-15', amount: 4200.00 },
+        ]
+      }
   },
   {
     id: 'EP04',
@@ -330,5 +357,14 @@ export const employeePayroll: EmployeePayroll[] = [
     bonus: 500,
     deductions: 680,
     netSalary: 6620,
+    details: {
+        earnings: { base: 3000, bonus: 200, overtime: 100 },
+        deductions: { federal: 600, state: 150, socialSecurity: 100, medicare: 40, insurance: 20 },
+        paymentHistory: [
+          { date: 'Nov 15, 2024', period: 'Pay Period: Nov 1-15', amount: 2590.00 },
+          { date: 'Oct 31, 2024', period: 'Pay Period: Oct 16-31', amount: 2590.00 },
+          { date: 'Oct 15, 2024', period: 'Pay Period: Oct 1-15', amount: 2590.00 },
+        ]
+      }
   },
 ];

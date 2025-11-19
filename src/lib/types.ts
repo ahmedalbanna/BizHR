@@ -61,4 +61,23 @@ export type EmployeePayroll = {
   bonus: number;
   deductions: number;
   netSalary: number;
+  details?: {
+    earnings: {
+      base: number;
+      bonus: number;
+      overtime: number;
+    };
+    deductions: {
+      federal: number;
+      state: number;
+      socialSecurity: number;
+      medicare: number;
+      insurance: number;
+    };
+    paymentHistory: {
+      date: string;
+      period: string;
+      amount: number;
+    }[];
+  };
 };
