@@ -15,6 +15,7 @@ import {
   Banknote,
   BarChart,
   Settings,
+  Bell,
 } from 'lucide-react';
 
 export const navItems = [
@@ -24,6 +25,7 @@ export const navItems = [
   { href: '/dashboard/attendance', icon: Clock, label: 'Attendance' },
   { href: '/dashboard/payroll', icon: Banknote, label: 'Payroll' },
   { href: '/dashboard/reports', icon: BarChart, label: 'Reports' },
+  { href: '/dashboard/notifications', icon: Bell, label: 'Notifications' },
 ];
 
 export function DashboardNav() {
@@ -35,7 +37,7 @@ export function DashboardNav() {
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton
             asChild
-            isActive={pathname === item.href}
+            isActive={pathname.startsWith(item.href) && item.href !== '/dashboard' || pathname === '/dashboard' && item.href === '/dashboard'}
             tooltip={item.label}
           >
             <Link href={item.href}>

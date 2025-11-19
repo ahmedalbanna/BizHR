@@ -6,6 +6,7 @@ import type {
   DailyAttendance,
   EmployeePayroll,
   Application,
+  Notification,
 } from '@/lib/types';
 
 export const employees: Employee[] = [
@@ -377,4 +378,13 @@ export const applications: Application[] = [
     { id: 'APP004', name: 'David Thompson', avatar: 'https://picsum.photos/seed/app4/100/100', role: 'Data Analyst', appliedDate: '2024-03-08', status: 'Pending', jobId: 'OP01' },
     { id: 'APP005', name: 'Jessica Park', avatar: 'https://picsum.photos/seed/app5/100/100', role: 'Marketing Specialist', appliedDate: '2024-03-05', status: 'Reviewed', jobId: 'OP01' },
     { id: 'APP006', name: 'Robert Wilson', avatar: 'https://picsum.photos/seed/app6/100/100', role: 'DevOps Engineer', appliedDate: '2024-03-03', status: 'Interviewed', jobId: 'OP01' },
+];
+
+export const notifications: Notification[] = [
+    { id: 'N01', type: 'leave', title: 'Leave Request Pending', description: 'Sarah Johnson\'s annual leave request requires your approval', timestamp: '3 seconds ago', read: false },
+    { id: 'N02', type: 'payroll', title: 'Payroll Processed', description: 'Monthly payroll for March has been successfully processed', timestamp: '2 hours ago', read: false },
+    { id: 'N03', type: 'performance', title: 'Performance Review Due', description: 'Quarterly performance reviews are due by end of week', timestamp: '1 day ago', read: false },
+    { id: 'N04', type: 'onboarding', title: 'New Employee Onboarding', description: 'Michael Chen starts Monday - prepare onboarding materials', timestamp: '2 days ago', read: true },
+    { id: 'N05', type: 'exit', title: 'Employee Exit Interview', description: 'Schedule exit interview with departing employee Lisa Wong', timestamp: '3 days ago', read: true },
+    { id: 'N06', type: 'training', title: 'Training Session Completed', description: 'Workplace Safety training completed by 15 employees', timestamp: '1 week ago', read: true },
 ];

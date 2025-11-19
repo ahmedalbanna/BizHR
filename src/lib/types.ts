@@ -91,3 +91,12 @@ export type Application = {
   status: 'Pending' | 'Reviewed' | 'Interviewed' | 'Received';
   jobId: string;
 };
+
+export type Notification = {
+  id: string;
+  type: 'leave' | 'payroll' | 'performance' | 'onboarding' | 'exit' | 'training';
+  title: string;
+  description: string;
+  timestamp: string;
+  read: boolean;
+};

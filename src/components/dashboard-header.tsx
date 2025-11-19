@@ -1,8 +1,9 @@
 "use client";
 
 import type { FC, HTMLAttributes, ReactNode } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Settings, Search } from "lucide-react";
+import { Settings, Search, Bell } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
@@ -37,6 +38,12 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
         <span className="sr-only">Search</span>
       </Button>
       {children}
+      <Link href="/dashboard/notifications">
+        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
+            <Bell className="h-5 w-5" />
+            <span className="sr-only">Notifications</span>
+        </Button>
+      </Link>
       <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
         <Settings className="h-5 w-5" />
         <span className="sr-only">Settings</span>
