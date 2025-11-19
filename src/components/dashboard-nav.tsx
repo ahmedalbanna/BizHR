@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
 } from '@/components/ui/sidebar';
 import {
-  LayoutDashboard,
+  LayoutGrid,
   Users,
   Briefcase,
   Clock,
@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { href: '/dashboard', icon: <LayoutDashboard />, label: 'Dashboard' },
+  { href: '/dashboard', icon: <LayoutGrid />, label: 'Dashboard' },
   { href: '/dashboard/employees', icon: <Users />, label: 'Employees' },
   { href: '/dashboard/recruitment', icon: <Briefcase />, label: 'Recruitment' },
   { href: '/dashboard/attendance', icon: <Clock />, label: 'Attendance' },

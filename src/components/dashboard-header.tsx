@@ -1,17 +1,8 @@
 "use client";
 
 import type { FC, HTMLAttributes } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { LogOut, Settings, User } from "lucide-react";
+import { Settings, Bell } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
@@ -34,40 +25,14 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
     >
       <SidebarTrigger className="md:hidden" />
       <h1 className="flex-1 text-xl font-semibold tracking-tight">{title}</h1>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-            <Avatar className="h-9 w-9">
-              <AvatarImage src="https://picsum.photos/seed/hr-manager/100/100" alt="HR Manager" data-ai-hint="person portrait" />
-              <AvatarFallback>HR</AvatarFallback>
-            </Avatar>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56" align="end" forceMount>
-          <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">HR Manager</p>
-              <p className="text-xs leading-none text-muted-foreground">
-                hr@bizhr.com
-              </p>
-            </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <User />
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings />
-            Settings
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <LogOut />
-            Log out
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Button variant="ghost" size="icon" className="relative h-9 w-9 rounded-full">
+        <Bell className="h-5 w-5" />
+        <span className="sr-only">Notifications</span>
+      </Button>
+      <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
+        <Settings className="h-5 w-5" />
+        <span className="sr-only">Settings</span>
+      </Button>
     </header>
   );
 };
