@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { employees } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -100,9 +101,11 @@ export default function EmployeeProfilePage() {
           <ArrowLeft />
         </Button>
         <h1 className="text-xl font-semibold">Employee Profile</h1>
-        <Button variant="ghost" size="icon">
-          <Pencil />
-        </Button>
+        <Link href={`/dashboard/employees/${id}/edit`}>
+            <Button variant="ghost" size="icon">
+                <Pencil />
+            </Button>
+        </Link>
       </header>
 
       <main className="p-4 space-y-6">
@@ -119,9 +122,11 @@ export default function EmployeeProfilePage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <Button>
-            <Pencil className="mr-2 h-4 w-4" /> Edit Profile
-          </Button>
+          <Link href={`/dashboard/employees/${id}/edit`}>
+            <Button className="w-full">
+              <Pencil className="mr-2 h-4 w-4" /> Edit Profile
+            </Button>
+          </Link>
           <Button variant="outline">
             <MessageSquare className="mr-2 h-4 w-4" /> Contact
           </Button>
