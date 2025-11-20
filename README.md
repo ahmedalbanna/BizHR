@@ -16,11 +16,11 @@ Our application aims to fill this gap by providing a powerful, yet intuitive and
 
 The key stakeholders and their primary responsibilities in the development and implementation of this application are:
 
-- **Amira Mubarak Al-Amiri (Project Lead & UI/UX Designer):** Responsible for overall project management, leading the team, and designing the user interface and experience for the dashboard and public-facing pages.
-- **Gadi Al Suleiman Al Omari (Lead Developer):** Responsible for the core application architecture, including the backend logic for employee and recruitment management.
-- **Renad Al-Sulaimi Al-Harbi (Frontend Developer):** Responsible for implementing the public job board, application forms, and ensuring the application is responsive and mobile-first.
-- **Sanaa Al-Shoyouni Al-Balawi (Backend & Database Specialist):** Responsible for developing the payroll and attendance modules, managing the database schema, and ensuring data security.
-- **Siham Al-Mutairi (QA & Testing Analyst):** Responsible for conducting the prototype evaluation, creating test cases, and ensuring all functional and non-functional requirements are met before deployment.
+- **Amira Mubarak Al-Amiri (Project Lead & UI/UX Designer):** Responsible for the overall UI/UX vision, designing the primary dashboard interface, and ensuring a consistent and intuitive user experience across all public-facing pages and internal modules.
+- **Gadi Al Suleiman Al Omari (Lead Frontend Developer):** Responsible for prototyping the core application structure, including the main layout, navigation, and the detailed views for employee profile management and editing.
+- **Renad Al-Sulaimi Al-Harbi (Frontend Developer):** Responsible for implementing the public-facing components, including the job board, company landing page, and the application forms, with a focus on responsiveness and mobile-first design.
+- **Sanaa Al-Shoyouni Al-Balawi (UI/UX Prototyper):** Responsible for prototyping the user interfaces for the payroll and attendance tracking modules, ensuring they are visually clear, functional, and meet the specified requirements.
+- **Siham Al-Mutairi (QA & Prototyping Analyst):** Responsible for evaluating the prototype's usability, testing all interactive components and page flows, and ensuring that the final design aligns with the project's functional and non-functional goals.
 
 ## 3. App Requirements
 
