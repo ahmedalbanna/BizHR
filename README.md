@@ -14,13 +14,13 @@ Our application aims to fill this gap by providing a powerful, yet intuitive and
 
 ## 2. Stakeholder Identification
 
-The key stakeholders involved in the development and usage of this application are:
+The key stakeholders and their primary responsibilities in the development and implementation of this application are:
 
-- Amira Mubarak Al-Amiri
-- Gadi Al Suleiman Al Omari
-- Renad Al-Sulaimi Al-Harbi
-- Sanaa Al-Shoyouni Al-Balawi
-- Siham Al-Mutairi
+- **Amira Mubarak Al-Amiri (Project Lead & UI/UX Designer):** Responsible for overall project management, leading the team, and designing the user interface and experience for the dashboard and public-facing pages.
+- **Gadi Al Suleiman Al Omari (Lead Developer):** Responsible for the core application architecture, including the backend logic for employee and recruitment management.
+- **Renad Al-Sulaimi Al-Harbi (Frontend Developer):** Responsible for implementing the public job board, application forms, and ensuring the application is responsive and mobile-first.
+- **Sanaa Al-Shoyouni Al-Balawi (Backend & Database Specialist):** Responsible for developing the payroll and attendance modules, managing the database schema, and ensuring data security.
+- **Siham Al-Mutairi (QA & Testing Analyst):** Responsible for conducting the prototype evaluation, creating test cases, and ensuring all functional and non-functional requirements are met before deployment.
 
 ## 3. App Requirements
 
